@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/created-by: application-service
+    app.kubernetes.io/instance: test-component-rpfx
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: test-component-rpfx
+    app.kubernetes.io/part-of: test-app-szko
+  name: test-component-rpfx
+  namespace: build-e2e-hacbs-odab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: test-component-rpfx
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/instance: test-component-rpfx
+    spec:
+      containers:
+      - image: quay.io/redhat-appstudio-qe/test-images:d78941be03ff4d229cb3e1fe1a9d8e2a
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8081
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        name: container-image
+        ports:
+        - containerPort: 8081
+        readinessProbe:
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          tcpSocket:
+            port: 8081
+        resources: {}
+status: {}
