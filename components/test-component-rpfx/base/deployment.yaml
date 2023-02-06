@@ -23,7 +23,7 @@ spec:
         app.kubernetes.io/instance: test-component-rpfx
     spec:
       containers:
-      - image: quay.io/redhat-appstudio-qe/test-images:d78941be03ff4d229cb3e1fe1a9d8e2a
+      - image: quay.io/redhat-appstudio-qe/test-images@sha256:52b95347bf76d2d27539c688810db597744db9e9f2beea739efd57098af7b607
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
